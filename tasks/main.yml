@@ -1,0 +1,37 @@
+---
+- name: add couchdb users
+  user: >
+    name=couchdb
+    group=couchdb
+    home=/var/lib/couchdb
+    state=present
+
+- name: deps
+  when: ansible_os_family == 'Debian'
+  package: name={{item}} state=latest
+  with_items:
+    - ca-certificates
+    - curl
+    - erlang-nox
+    - libicu52
+    - libmozjs185-1.0
+    - libnspr4
+    - libnspr4-0d
+    - gcc
+    - g++
+    - erlang-dev
+    - libcurl4-openssl-dev
+    - libicu-dev
+    - libmozjs185-dev
+    - libnspr4-dev
+    - make
+
+- name: download...
+  get_url: >-
+    url={{couchdb_url}}
+    dest=/tmp/{{couchdb_tgz}}
+    owner=root
+    group=root
+    mode=644
+
+
