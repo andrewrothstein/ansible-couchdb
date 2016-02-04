@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Andrew Rothstein
-  description: '@TODO name this role'
+  description: installs couchdb
   company: BlackRock
   license:
     - MIT
@@ -20,5 +20,6 @@ galaxy_info:
   categories:
     - development
 
-dependencies: []
+dependencies:
+  - andrewrothstein.unarchive-deps
   
