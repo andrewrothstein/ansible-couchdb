@@ -54,6 +54,7 @@
     copy=no
     src=/tmp/{{couchdb_tgz}}
     dest=/opt
+    creates=/opt/{{couchdb_name}}
 
 - name: build it...
   command: '{{item}}'
