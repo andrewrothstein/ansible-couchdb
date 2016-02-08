@@ -1,0 +1,3 @@
+---
+couchdb_dep_pkgs:
+  - erlang

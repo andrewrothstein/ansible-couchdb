@@ -7,12 +7,6 @@ galaxy_info:
     - MIT
   min_ansible_version: 1.2
   platforms:
-    - name: EL
-      versions:
-        - 7
-    - name: Fedora
-      versions:
-        - 21
     - name: Ubuntu
       versions:
         - trusty
@@ -21,5 +15,6 @@ galaxy_info:
     - development
 
 dependencies:
+  - andrewrothstein.curl
   - andrewrothstein.unarchive-deps
   

@@ -1,54 +1,22 @@
 ---
-- name: add the couchdb user group
-  group: name=couchdb state=present
-  
-- name: add the couchdb user
-  user: >
-    name=couchdb
-    group=couchdb
-    home=/var/lib/couchdb
-    state=present
+- name: resolve platform specific vars
+  include_vars: "{{item}}"
+  with_first_found:
+    - "{{ansible_os_distribution}}.yml"
+    - "{{ansible_os_family}}.yml"
 
 - name: deps
-  when: ansible_os_family == 'Debian'
   package: name={{item}} state=present
-  with_items:
-    - ca-certificates
-    - curl
-    - erlang-nox
-    - libicu52
-    - libmozjs185-1.0
-    - libnspr4
-    - libnspr4-0d
-    - gcc
-    - g++
-    - erlang-dev
-    - libcurl4-openssl-dev
-    - libicu-dev
-    - libmozjs185-dev
-    - libnspr4-dev
-    - make
+  with_items: '{{couchdb_dep_pkgs}}'
 
 - name: download...
-  command: curl -s -L {{couchdb_url}} -o /tmp/{{couchdb_tgz}}
-  args:
-    creates: /tmp/{{couchdb_tgz}}
-    
-- name: perms of tgz
-  file: >-
-    path=/tmp/{{couchdb_tgz}}
+  get_url: >
+    url={{couchdb_url}}
+    dest=/tmp/{{couchdb_tgz}}
     owner=root
     group=root
     mode=644
 
-- name: ensure existence of /opt
-  file: >-
-    path=/opt
-    owner=root
-    group=root
-    mode=0755
-    state=directory
-    
 - name: unarchive...
   unarchive: >-
     copy=no
