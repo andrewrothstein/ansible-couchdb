@@ -42,9 +42,12 @@
     
 - name: configure install....
   template: >-
-    src=httpd_proxies.ini.j2
-    dest=/usr/local/etc/couchdb/local.d/httpd_proxies.ini
+    src={{item}}.j2
+    dest=/usr/local/etc/couchdb/local.d/{{item}}
     owner=root
     group=root
     mode=0644
+  with_items:
+    - httpd_proxies.ini
+    - httpd.ini
   

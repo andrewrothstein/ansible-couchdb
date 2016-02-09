@@ -2,7 +2,10 @@
 couchdb_ver : '1.6.1'
 couchdb_mirror : 'https://www.apache.org/dist/couchdb/source'
 
+#couchdb_conf_port : 5984
+#couchdb_conf_bind_address : '127.0.0.1'
+
 # e.g. for couchdb-lucene
-couchdb_httpd_global_handlers :
-  - endpoint : '_fti'
-    url : 'http://localhost:5985'
+#couchdb_httpd_global_handlers :
+#  - endpoint : '_fti'
+#    url : 'http://localhost:5985'
