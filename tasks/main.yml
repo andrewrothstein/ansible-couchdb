@@ -50,4 +50,5 @@
   with_items:
     - httpd_proxies.ini
     - httpd.ini
+    - admins.ini
   
