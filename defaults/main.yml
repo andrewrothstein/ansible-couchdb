@@ -11,6 +11,6 @@ couchdb_mirror : 'https://www.apache.org/dist/couchdb/source'
 #    url : 'http://localhost:5985'
 
 # kill the admin party
-#couchdb_admins:
-#  bob: 'bob-password'
-#  alice: 'alice-password'
+couchdb_admins:
+  bob: 'bob-password'
+  alice: 'alice-password'

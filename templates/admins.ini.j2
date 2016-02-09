@@ -6,9 +6,9 @@
 ; changing this.
 {% if couchdb_admins is defined %}
 [admins]
-{% for u, p in couchdb_admins %}
+{% for (userid, pwd) in couchdb_admins.iteritems() %}
+{{userid}} = '{{pwd|e}}'
 {% endfor %}
-{{u}} = "{{p}}"
 {% else %}
 ;admin = mysecretpassword
 {% endif %}
