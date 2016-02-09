@@ -4,11 +4,11 @@
 ; around in plain-text files). You can add more admin accounts with more
 ; 'username = password' lines. Don't forget to restart CouchDB after
 ; changing this.
-[admins]
 {% if couchdb_admins is defined %}
-{% for admin in couchdb_admins %}
+[admins]
+{% for u, p in couchdb_admins %}
 {% endfor %}
-{{admin.user}} = {{admin.pwd}}
+{{u}} = "{{p}}"
 {% else %}
 ;admin = mysecretpassword
 {% endif %}
