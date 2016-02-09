@@ -10,9 +10,13 @@
   with_items: '{{couchdb_dep_pkgs}}'
 
 - name: download...
-  get_url: >
-    url={{couchdb_url}}
-    dest=/tmp/{{couchdb_tgz}}
+  command: curl -s -L {{couchdb_url}} -o /tmp/{{couchdb_tgz}}
+  args:
+    creates: /tmp/{{couchdb_tgz}}
+
+- name: fix perms
+  file: >
+    path=/tmp/{{couchdb_tgz}}
     owner=root
     group=root
     mode=644
