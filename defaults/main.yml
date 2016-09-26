@@ -1,5 +1,5 @@
 ---
-couchdb_ver : '1.6.1'
+couchdb_ver : '2.0.0'
 couchdb_mirror : 'https://www.apache.org/dist/couchdb/source'
 
 #couchdb_conf_port : 5984

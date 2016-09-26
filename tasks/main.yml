@@ -7,22 +7,21 @@
     - "{{ansible_os_family}}.yml"
 
 - name: deps
+  become: yes
+  become_user: root
   package: name={{item}} state=present
   with_items: '{{couchdb_dep_pkgs}}'
 
 - name: download...
-  command: curl -s -L {{couchdb_url}} -o /tmp/{{couchdb_tgz}}
-  args:
-    creates: /tmp/{{couchdb_tgz}}
-
-- name: fix perms
-  file: >
-    path=/tmp/{{couchdb_tgz}}
-    owner=root
-    group=root
-    mode=644
+  become: yes
+  become_user: root
+  get_url: >-
+    url={{couchdb_url}}
+    dest=/tmp/{{couchdb_tgz}}
 
 - name: unarchive...
+  become: yes
+  become_user: root
   unarchive: >-
     copy=no
     src=/tmp/{{couchdb_tgz}}
@@ -30,26 +29,30 @@
     creates=/opt/{{couchdb_name}}
 
 - name: configure build...
+  become: yes
+  become_user: root
   command: ./configure --with-js-lib=/usr/lib --with-js-include=/usr/include/mozjs
   args:
     chdir: /opt/{{couchdb_name}}
     creates: /opt/{{couchdb_name}}/Makefile
     
 - name: build/install...
+  become: yes
+  become_user: root
   shell: make && make install
   args:
     chdir: /opt/{{couchdb_name}}
     creates: /usr/local/bin/couchdb
     
 - name: configure install....
-  template: >-
-    src={{item}}.j2
-    dest=/usr/local/etc/couchdb/local.d/{{item}}
-    owner=root
-    group=root
-    mode=0644
+  become: yes
+  become_user: root
   with_items:
     - httpd_proxies.ini
     - httpd.ini
     - admins.ini
+  template: >-
+    src={{item}}.j2
+    dest=/usr/local/etc/couchdb/local.d/{{item}}
+    mode=0644
   
