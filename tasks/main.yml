@@ -18,6 +18,7 @@
   get_url: >-
     url={{couchdb_url}}
     dest=/tmp/{{couchdb_tgz}}
+    mode=0644
 
 - name: unarchive...
   become: yes
@@ -31,28 +32,93 @@
 - name: configure build...
   become: yes
   become_user: root
-  command: ./configure --with-js-lib=/usr/lib --with-js-include=/usr/include/mozjs
+  command: ./configure
   args:
     chdir: /opt/{{couchdb_name}}
-    creates: /opt/{{couchdb_name}}/Makefile
+    creates: /opt/{{couchdb_name}}/rel/couchdb.config
     
-- name: build/install...
+- name: build...
   become: yes
   become_user: root
-  shell: make && make install
+  command: make release
   args:
     chdir: /opt/{{couchdb_name}}
-    creates: /usr/local/bin/couchdb
+    creates: /opt/{{couchdb_name}}/rel/couchdb
+
+- name: install...
+  become: yes
+  become_user: root
+  command: cp -R /opt/{{couchdb_name}}/rel/couchdb {{couchdb_install_parent_dir}}/{{couchdb_name}}
+  args:
+    creates: '{{couchdb_install_parent_dir}}/{{couchdb_name}}'
+
+- name: link...
+  become: yes
+  become_user: root
+  file: >-
+    src={{couchdb_install_parent_dir}}/{{couchdb_name}}
+    dest={{couchdb_install_parent_dir}}/couchdb
+    state=link
+
+- name: create local config dir
+  become: yes
+  become_user: root
+  file: >-
+    path={{couchdb_install_parent_dir}}/couchdb/etc/local.d
+    state=directory
     
-- name: configure install....
+- name: create couchdb group
+  become: yes
+  become_user: root
+  group: name={{couchdb_group}} state=present
+  
+- name: create couchdb user
+  become: yes
+  become_user: root
+  user: >-
+    name={{couchdb_user}}
+    group={{couchdb_group}}
+    home={{couchdb_data_dir}}
+    state=present
+    
+- name: create directories
+  become: yes
+  become_user: root
+  with_items:
+    - { d: '{{couchdb_etc_pki_dir}}', m: '0700' }
+  file: >-
+    path={{item.d}}
+    state=directory
+    owner={{couchdb_user}}
+    group={{couchdb_group}}
+    mode={{item.m}}
+
+- name: install keys/certs
+  when: couchdb_secure
+  become: yes
+  become_user: root
+  with_items:
+    - { f: '{{couchdb_pki_key_src}}', d: '{{couchdb_pki_key_dest}}', m: '0400' }
+    - { f: '{{couchdb_pki_cert_src}}', d: '{{couchdb_pki_cert_dest}}', m: '0600'}
+    - { f: '{{couchdb_pki_ca_cert_src}}', d: '{{couchdb_pki_ca_cert_dest}}', m: '0600' }
+  copy: >-
+    src={{item.f}}
+    dest={{item.d}}
+    owner={{couchdb_user}}
+    group={{couchdb_group}}
+    mode={{item.m}}
+    
+- name: configurate....
   become: yes
   become_user: root
   with_items:
     - httpd_proxies.ini
-    - httpd.ini
+    - chttpd.ini
     - admins.ini
+    - ssl.ini
+    - daemons.ini
   template: >-
     src={{item}}.j2
-    dest=/usr/local/etc/couchdb/local.d/{{item}}
+    dest=/usr/local/couchdb/etc/local.d/{{item}}
     mode=0644
   

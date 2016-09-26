@@ -10,6 +10,7 @@ couchdb_dep_pkgs:
   - g++
   - make
   - erlang-dev
+  - erlang-reltool
   - libcurl4-openssl-dev
   - libicu-dev
   - libmozjs185-dev

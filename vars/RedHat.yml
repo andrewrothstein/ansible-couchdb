@@ -1,3 +1,4 @@
 ---
 couchdb_dep_pkgs:
   - erlang
+  - erlang-reltool
