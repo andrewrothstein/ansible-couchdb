@@ -11,6 +11,9 @@ galaxy_info:
       versions:
         - trusty
         - xenial
+    - name: EL
+      version:
+        - 7
 
   galaxy_tags:
     - development
