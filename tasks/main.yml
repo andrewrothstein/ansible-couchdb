@@ -12,9 +12,23 @@
   package: name={{item}} state=present
   with_items: '{{couchdb_dep_pkgs}}'
 
-- name: download...
+- name: create couchdb group
   become: yes
   become_user: root
+  group: name={{couchdb_group}} state=present
+  
+- name: create couchdb user
+  become: yes
+  become_user: root
+  user: >-
+    name={{couchdb_user}}
+    group={{couchdb_group}}
+    home={{couchdb_home_dir}}
+    state=present
+
+- name: download...
+  become: yes
+  become_user: '{{couchdb_user}}'
   get_url: >-
     url={{couchdb_url}}
     dest=/tmp/{{couchdb_tgz}}
@@ -22,41 +36,34 @@
 
 - name: unarchive...
   become: yes
-  become_user: root
+  become_user: '{{couchdb_user}}'
   unarchive: >-
     copy=no
     src=/tmp/{{couchdb_tgz}}
-    dest=/opt
-    creates=/opt/{{couchdb_name}}
+    dest={{couchdb_src_dir}}
+    creates={{couchdb_src_dir}}/{{couchdb_name}}
 
 - name: configure build...
   become: yes
-  become_user: root
+  become_user: '{{couchdb_user}}'
   command: ./configure
   args:
-    chdir: /opt/{{couchdb_name}}
-    creates: /opt/{{couchdb_name}}/rel/couchdb.config
+    chdir: '{{couchdb_src_dir}}'
+    creates: '{{couchdb_src_dir}}/rel/couchdb.config'
     
 - name: build...
   become: yes
-  become_user: root
+  become_user: '{{couchdb_user}}'
   command: make release
   args:
-    chdir: /opt/{{couchdb_name}}
-    creates: /opt/{{couchdb_name}}/rel/couchdb
+    chdir: '{{couchdb_src_dir}}'
+    creates: '{{couchdb_src_dir}}/rel/couchdb'
 
 - name: install...
   become: yes
   become_user: root
-  command: cp -R /opt/{{couchdb_name}}/rel/couchdb {{couchdb_install_parent_dir}}/{{couchdb_name}}
+  command: cp -R {{couchdb_src_dir}}/rel/couchdb/* {{couchdb_home_dir}}
   args:
-    creates: '{{couchdb_install_parent_dir}}/{{couchdb_name}}'
+    creates: '{{couchdb_home_dir}}/bin/couchdb'
 
-- name: link...
-  become: yes
-  become_user: root
-  file: >-
-    src={{couchdb_install_parent_dir}}/{{couchdb_name}}
-    dest={{couchdb_install_parent_dir}}/couchdb
-    state=link
 
