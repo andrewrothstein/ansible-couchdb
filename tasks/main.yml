@@ -50,7 +50,7 @@
 - name: install...
   become: yes
   become_user: root
-  command: cp -R {{couchdb_src_dir}}/rel/couchdb/* {{couchdb_home_dir}}
+  command: cp -R {{couchdb_src_dir}}/rel/couchdb/* {{couchdb_install_bin_dir}}
   args:
     chdir: '{{couchdb_src_dir}}'
     creates: '{{couchdb_src_dir}}/bin/couchdb'
