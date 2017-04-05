@@ -9,39 +9,44 @@
 - name: deps
   become: yes
   become_user: root
-  package: name={{item}} state=present
   with_items: '{{couchdb_dep_pkgs}}'
+  package:
+    name: '{{item}}'
+    state: present
 
 - name: create couchdb group
   become: yes
   become_user: root
-  group: name={{couchdb_group}} state=present
+  group:
+    name: '{{couchdb_group}}'
+    state: present
   
 - name: create couchdb user
   become: yes
   become_user: root
-  user: >-
-    name={{couchdb_user}}
-    group={{couchdb_group}}
-    home={{couchdb_home_dir}}
-    state=present
+  user:
+    name: '{{couchdb_user}}'
+    group: '{{couchdb_group}}'
+    home: '{{couchdb_home_dir}}'
+    state: present
 
 - name: download...
   become: yes
-  become_user: '{{couchdb_user}}'
-  get_url: >-
-    url={{couchdb_url}}
-    dest=/tmp/{{couchdb_tgz}}
-    mode=0644
+  become_user: root
+  get_url:
+    url: '{{couchdb_url}}'
+    owner: '{{couchdb_user}}'
+    dest: /tmp/{{couchdb_tgz}}
+    mode: 0644
 
 - name: unarchive...
   become: yes
   become_user: '{{couchdb_user}}'
-  unarchive: >-
-    copy=no
-    src=/tmp/{{couchdb_tgz}}
-    dest={{couchdb_src_dir}}
-    creates={{couchdb_src_dir}}/{{couchdb_name}}
+  unarchive:
+    copy: no
+    src: /tmp/{{couchdb_tgz}}
+    dest: '{{couchdb_src_dir}}'
+    creates: '{{couchdb_src_dir}}/{{couchdb_name}}'
 
 - name: configure build...
   become: yes
@@ -61,7 +66,7 @@
 
 - name: install...
   become: yes
-  become_user: root
+  become_user: '{{couchdb_user}}'
   command: cp -R {{couchdb_src_dir}}/rel/couchdb/* {{couchdb_home_dir}}
   args:
     creates: '{{couchdb_home_dir}}/bin/couchdb'
