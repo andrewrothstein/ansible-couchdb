@@ -13,7 +13,7 @@ couchdb_dep_pkgs:
   - erlang-xmerl
   - gcc-c++
   - help2man
-  - js-devel-1.8.5
+  - js-devel
   - libicu-devel
   - libtool
   - perl-Test-Harness
