@@ -22,6 +22,16 @@
     dest: /tmp/{{couchdb_tgz}}
     mode: 0644
 
+- name: create directory
+  file:
+    path: '{{ item }}'
+    state: directory
+    mode: 0755
+  become: yes
+  become_user: root
+  with_items:
+    - '{{couchdb_parent_srcs_dir}}'
+
 - name: unarchive...
   become: yes
   become_user: root
