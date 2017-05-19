@@ -1,6 +1,6 @@
 andrewrothstein.couchdb
 ===========================
-[![CircleCI](https://circleci.com/gh/andrewrothstein/ansible-couchdb.svg?style=svg)](https://circleci.com/gh/andrewrothstein/ansible-couchdb)
+[![Build Status](https://travis-ci.org/andrewrothstein/ansible-couchdb.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-couchdb)
 
 Installs [Apache CouchDB](http://couchdb.apache.org/).
 
