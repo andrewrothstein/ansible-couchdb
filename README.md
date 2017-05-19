@@ -1,6 +1,6 @@
-[![CircleCI](https://circleci.com/gh/andrewrothstein/ansible-couchdb.svg?style=svg)](https://circleci.com/gh/andrewrothstein/ansible-couchdb)
 andrewrothstein.couchdb
 ===========================
+[![CircleCI](https://circleci.com/gh/andrewrothstein/ansible-couchdb.svg?style=svg)](https://circleci.com/gh/andrewrothstein/ansible-couchdb)
 
 Installs [Apache CouchDB](http://couchdb.apache.org/).
 
