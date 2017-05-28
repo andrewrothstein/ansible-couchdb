@@ -2,7 +2,7 @@ andrewrothstein.couchdb
 ===========================
 [![Build Status](https://travis-ci.org/andrewrothstein/ansible-couchdb.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-couchdb)
 
-Installs [Apache CouchDB](http://couchdb.apache.org/).
+Builds from source and installs [Apache CouchDB](http://couchdb.apache.org/).
 
 Requirements
 ------------

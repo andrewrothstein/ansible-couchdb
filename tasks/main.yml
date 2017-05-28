@@ -1,12 +1,16 @@
 ---
 - name: resolve platform specific vars
-  include_vars: "{{item}}"
+  include_vars: '{{item}}'
   with_first_found:
-    - "{{ansible_distribution}}-{{ansible_distribution_release}}.yml"
-    - "{{ansible_distribution}}.yml"
-    - "{{ansible_os_family}}.yml"
+    - files:
+        - '{{ansible_distribution}}-{{ansible_distribution_release}}.yml'
+        - '{{ansible_distribution}}.yml'
+        - '{{ansible_os_family}}.yml'
+      skip: true
+      paths:
+        - '{{role_path}}/vars'
 
-- name: deps
+- name: install dep pkgs...
   become: yes
   become_user: root
   with_items: '{{couchdb_dep_pkgs}}'
@@ -22,15 +26,15 @@
     dest: /tmp/{{couchdb_tgz}}
     mode: 0644
 
-- name: create directory
-  file:
-    path: '{{ item }}'
-    state: directory
-    mode: 0755
+- name: create parent src directory...
   become: yes
   become_user: root
   with_items:
     - '{{couchdb_parent_srcs_dir}}'
+  file:
+    path: '{{ item }}'
+    state: directory
+    mode: 0755
 
 - name: unarchive...
   become: yes
