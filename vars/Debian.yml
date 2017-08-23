@@ -1,18 +1,8 @@
 ---
 couchdb_dep_pkgs:
-  - ca-certificates
-  - erlang-nox
-  - libicu52
-  - libmozjs185-1.0
-  - libnspr4
-  - libnspr4-0d
-  - gcc
-  - g++
-  - make
-  - erlang-dev
-  - erlang-reltool
-  - libcurl4-openssl-dev
+  - build-essential
+  - pkg-config
+  - erlang
   - libicu-dev
   - libmozjs185-dev
-  - libnspr4-dev
-
+  - libcurl4-openssl-dev

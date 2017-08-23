@@ -1,19 +1,16 @@
 ---
 couchdb_dep_pkgs:
-  - autoconf
-  - autoconf-archive
-  - automake
   - curl-devel
-  - erlang
   - erlang-asn1
   - erlang-erts
   - erlang-eunit
-  - erlang-os_mon
-  - erlang-reltool
-  - erlang-xmerl
   - gcc-c++
+  - erlang-os_mon
+  - erlang-xmerl
+  - erlang-erl_interface
+  - erlang-reltool
   - help2man
-  - js-devel
+  - js-devel-1.8.5
   - libicu-devel
   - libtool
   - perl-Test-Harness
