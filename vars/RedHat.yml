@@ -10,7 +10,7 @@ couchdb_dep_pkgs:
   - erlang-erl_interface
   - erlang-reltool
   - help2man
-  - js-devel-1.8.5
+  - js-devel
   - libicu-devel
   - libtool
   - perl-Test-Harness
