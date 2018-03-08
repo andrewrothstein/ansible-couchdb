@@ -1,6 +1,6 @@
 ---
 couchdb_ver : '2.1.0'
-couchdb_mirror : https://www.apache.org/dist/couchdb/source
+couchdb_mirror : https://archive.apache.org/dist/couchdb/source
 
 couchdb_install_parent_dir: /usr/local
 couchdb_parent_srcs_dir: /usr/local/src
