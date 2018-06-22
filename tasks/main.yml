@@ -25,6 +25,7 @@
     url: '{{couchdb_url}}'
     dest: /tmp/{{couchdb_tgz}}
     mode: 0644
+    checksum: '{{couchdb_checksum}}'
 
 - name: create parent src directory...
   become: yes
