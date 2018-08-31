@@ -28,7 +28,6 @@ galaxy_info:
   galaxy_tags:
     - database
     - couchdb
-    - 'k/v store'
 
 dependencies:
   - role: andrewrothstein.unarchive-deps
