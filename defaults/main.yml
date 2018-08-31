@@ -1,6 +1,6 @@
 ---
-couchdb_ver : '2.2.0'
-couchdb_mirror : https://archive.apache.org/dist/couchdb/source
+couchdb_ver: '2.2.0'
+couchdb_mirror: https://archive.apache.org/dist/couchdb/source
 couchdb_checksums:
   # https://www.apache.org/dist/couchdb/source/2.1.1/apache-couchdb-2.1.1.tar.gz.sha256
   '2.1.1': sha256:d5f255abc871ac44f30517e68c7b30d1503ec0f6453267d641e00452c04e7bcc
