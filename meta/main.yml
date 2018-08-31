@@ -22,6 +22,9 @@ galaxy_info:
         - 23
         - 24
         - 25
+        - 26
+        - 27
+        - 28
   galaxy_tags:
     - database
     - couchdb
@@ -29,8 +32,8 @@ galaxy_info:
 
 dependencies:
   - role: andrewrothstein.unarchive-deps
-    version: v1.0.9
+    version: v1.0.10
   - role: andrewrothstein.epel
-    version: v1.0.5
+    version: v1.0.6
   - role: andrewrothstein.gcc-toolbox
-    version: v1.0.7
+    version: v1.0.9
