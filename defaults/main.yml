@@ -1,5 +1,5 @@
 ---
-couchdb_ver: '2.3.1'
+couchdb_ver: '3.0.0'
 couchdb_mirror: https://archive.apache.org/dist/couchdb/source
 couchdb_checksums:
   # https://www.apache.org/dist/couchdb/source/2.1.1/apache-couchdb-2.1.1.tar.gz.sha256
@@ -8,6 +8,8 @@ couchdb_checksums:
   '2.2.0': sha256:0e3ceb8aab73af8e54a2e2c949f362495b1c938455a15e9a4e294901c6c67985
   # https://www.apache.org/dist/couchdb/source/2.3.1/apache-couchdb-2.3.1.tar.gz.sha256
   '2.3.1': sha256:43eb8cec41eb52871bf22d35f3e2c2ce5b806ebdbce3594cf6b0438f2534227d
+  # https://www.apache.org/dist/couchdb/source/3.0.0/apache-couchdb-3.0.0.tar.gz.sha256
+  '3.0.0': sha256:d109bb1a70fe746c04a9bf79a2bb1096cb949c750c29dbd196e9c2efd4167fd9
 
 couchdb_install_parent_dir: /usr/local
 couchdb_parent_srcs_dir: /usr/local/src
