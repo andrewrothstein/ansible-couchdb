@@ -1,8 +1,8 @@
 dependencies:
 - role: andrewrothstein.unarchive-deps
-  version: v1.1.2
+  version: v1.1.5
 - role: andrewrothstein.gcc-toolbox
-  version: v1.1.0
+  version: v1.1.2
 galaxy_info:
   author: Andrew Rothstein
   company: BlackRock
@@ -16,16 +16,12 @@ galaxy_info:
   platforms:
   - name: Debian
     versions:
-    - jessie
+    - buster
     - stretch
   - name: Ubuntu
     versions:
     - xenial
   - name: Fedora
     version:
-    - 23
-    - 24
-    - 25
-    - 26
-    - 27
-    - 28
+    - 31
+    - 32
