@@ -1,5 +1,6 @@
+---
 - debian_buster
-- debian_stretch
-- fedora_31
-- fedora_32
-- ubuntu_xenial
+- debian_bullseye
+- fedora_34
+- rockylinux_8.4
+- ubuntu_focal
